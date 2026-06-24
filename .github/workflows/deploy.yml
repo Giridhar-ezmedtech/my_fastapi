@@ -29,6 +29,7 @@ jobs:
             git reset --hard origin/main
             
             # Synchronize virtual environment dependencies using uv
+            export PATH="/home/ubuntu/.local/bin:$PATH"
             uv sync
             
             # Restart the systemd service for FastAPI

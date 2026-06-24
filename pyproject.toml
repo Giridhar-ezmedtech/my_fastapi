@@ -1,0 +1,17 @@
+[project]
+name = "curd-fastapi"
+version = "1.0.0"
+description = "A simple FastAPI CRUD application for learning CI/CD deployment using GitHub Actions."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "fastapi==0.111.0",
+    "uvicorn==0.30.1",
+    "pydantic==2.7.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.2.2",
+    "httpx==0.27.0",
+]

@@ -1,0 +1,35 @@
+name: Deploy FastAPI to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Exit immediately if a command exits with a non-zero status
+            set -e
+            
+            # Navigate to the project directory
+            cd /home/ubuntu/my_fastapi
+            
+            # Pull the latest code from the main branch
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Synchronize virtual environment dependencies using uv
+            uv sync
+            
+            # Restart the systemd service for FastAPI
+            sudo systemctl restart fastapi

@@ -45,6 +45,21 @@ def test_read_status():
     }
 
 
+def test_read_health():
+    """
+    Tests GET /health to ensure deployment information and status match expected values.
+    """
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {
+        "application": "CRUD FastAPI",
+        "server": "AWS EC2",
+        "deployment": "GitHub Actions CI/CD",
+        "status": "Healthy"
+    }
+
+
+
 
 def test_create_employee():
     """

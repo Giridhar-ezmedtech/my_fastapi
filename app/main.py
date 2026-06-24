@@ -44,6 +44,21 @@ def read_status():
     }
 
 
+# GET /health - Health check endpoint
+@app.get("/health", status_code=status.HTTP_200_OK)
+def read_health():
+    """
+    Detailed system health status check.
+    """
+    return {
+        "application": "CRUD FastAPI",
+        "server": "AWS EC2",
+        "deployment": "GitHub Actions CI/CD",
+        "status": "Healthy"
+    }
+
+
+
 # 2. POST /employees - Create a new employee
 @app.post("/employees", response_model=Employee, status_code=status.HTTP_201_CREATED)
 def create_employee(employee: EmployeeCreate):

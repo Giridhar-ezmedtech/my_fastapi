@@ -33,6 +33,19 @@ def test_read_root():
     }
 
 
+def test_read_status():
+    """
+    Tests GET /status to ensure API health status check functions properly.
+    """
+    response = client.get("/status")
+    assert response.status_code == 200
+    assert response.json() == {
+        "status": "healthy",
+        "database": "online (in-memory)"
+    }
+
+
+
 def test_create_employee():
     """
     Tests POST /employees to ensure a new employee can be created.

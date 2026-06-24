@@ -10,7 +10,7 @@ from app.schemas import Employee, EmployeeCreate, EmployeeUpdate
 # =====================================================================
 
 app = FastAPI(
-    title="Employee Management API",
+    title="Employee Management API - CI/CD Demo",
     description="A simple FastAPI CRUD application for learning CI/CD deployment using GitHub Actions.",
     version="1.0.0"
 )
@@ -31,6 +31,18 @@ def read_root():
         "message": "Welcome to the Employee Management API!",
         "docs_url": "/docs"
     }
+
+# GET /status - Status check endpoint
+@app.get("/status", status_code=status.HTTP_200_OK)
+def read_status():
+    """
+    Simple status check endpoint.
+    """
+    return {
+        "status": "healthy",
+        "database": "online (in-memory)"
+    }
+
 
 # 2. POST /employees - Create a new employee
 @app.post("/employees", response_model=Employee, status_code=status.HTTP_201_CREATED)
